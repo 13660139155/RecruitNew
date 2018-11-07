@@ -15,8 +15,6 @@ public class MainActivity extends AppCompatActivity {
     Button btn1;
     @BindView(R.id.btn_2)
     Button btn2;
-    @BindView(R.id.btn_3)
-    Button btn3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,9 +35,4 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    @OnClick(R.id.btn_3)
-    public void onViewClicked3() {
-        Intent intent = new Intent(MainActivity.this, Main2Activity.class);
-        startActivity(intent);
-    }
 }
