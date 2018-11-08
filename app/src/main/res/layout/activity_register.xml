@@ -10,18 +10,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@drawable/star"
-        android:scaleType="centerCrop" />
+        android:scaleType="centerCrop"
+        tools:ignore="ContentDescription" />
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@null"
+        android:fitsSystemWindows="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/tl_common"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
+            android:fitsSystemWindows="true"
             app:navigationIcon="@drawable/ic_arrow_left"
             app:titleTextColor="@color/white"
             app:title="安卓报名端">
@@ -453,7 +456,7 @@
                             app:layout_constraintRight_toLeftOf="@+id/et_spectiality"
                             app:layout_constraintBottom_toBottomOf="parent"/>
 
-                        <EditText
+                        <com.example.hy.recruitnew.widgets.ScrollEditText
                             android:id="@+id/et_spectiality"
                             android:layout_width="0dp"
                             android:layout_height="@dimen/dp_150"
@@ -470,10 +473,6 @@
                             app:layout_constraintRight_toRightOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
                             tools:ignore="Autofill,LabelFor" />
-
-                        <include layout="@layout/common_clear"
-                            android:id="@+id/ib_clear3"/>
-
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -503,7 +502,7 @@
                             app:layout_constraintRight_toLeftOf="@+id/et_self_introduction"
                             app:layout_constraintBottom_toBottomOf="parent"/>
 
-                        <EditText
+                        <com.example.hy.recruitnew.widgets.ScrollEditText
                             android:id="@+id/et_self_introduction"
                             android:layout_width="0dp"
                             android:layout_height="@dimen/dp_150"
@@ -521,9 +520,6 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             tools:ignore="Autofill,LabelFor,TextFields" />
 
-                        <include
-                            layout="@layout/common_clear"
-                            android:id="@+id/ib_clear2"/>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -553,7 +549,7 @@
                             app:layout_constraintRight_toLeftOf="@+id/et_expection"
                             app:layout_constraintBottom_toBottomOf="parent"/>
 
-                        <EditText
+                        <com.example.hy.recruitnew.widgets.ScrollEditText
                             android:id="@+id/et_expection"
                             android:layout_width="0dp"
                             android:layout_height="@dimen/dp_150"
@@ -570,10 +566,6 @@
                             app:layout_constraintRight_toRightOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
                             tools:ignore="Autofill,LabelFor,TextFields" />
-
-                        <include
-                            layout="@layout/common_clear"
-                            android:id="@+id/ib_clear1"/>
 
 
                     </androidx.constraintlayout.widget.ConstraintLayout>

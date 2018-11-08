@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="BaseAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -9,17 +9,19 @@
         <item name="android:windowAnimationStyle">@style/ActivityAnimation</item>
     </style>
 
+    <style name="AppTheme" parent="@style/BaseAppTheme">
+
+    </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="ActivityAnimation">
-
         <item name="android:activityCloseExitAnimation">@anim/anim_close_exit</item>
         <item name="android:activityCloseEnterAnimation">@anim/anim_close_enter</item>
         <item name="android:activityOpenEnterAnimation">@anim/anim_open_enter</item>
         <item name="android:activityOpenExitAnimation">@anim/anim_open_exit</item>
-
     </style>
 
 </resources>

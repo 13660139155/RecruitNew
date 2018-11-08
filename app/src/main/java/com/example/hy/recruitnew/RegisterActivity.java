@@ -5,13 +5,18 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.example.hy.recruitnew.util.StatusBarUtil;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.widget.NestedScrollView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 public class RegisterActivity extends AppCompatActivity {
+
+    private Unbinder mUnbinder;
 
     @BindView(R.id.tl_common)
     Toolbar tlCommon;
@@ -58,8 +63,16 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        ButterKnife.bind(this);
+        StatusBarUtil.compat(this);
+        mUnbinder = ButterKnife.bind(this);
 
         setSupportActionBar(tlCommon);
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        mUnbinder.unbind();
+        super.onDestroy();
     }
 }

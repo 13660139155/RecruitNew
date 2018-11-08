@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#0097A7</color>
@@ -10,6 +10,7 @@
     <color name="thirdText">#b9757575</color>
     <color name="background">#32ffffff</color>
     <color name="divier">#34bdbdbd</color>
-    <color name="translucence">#80FFFFFF</color>
+    <color name="toast_background">#c8535353</color>
+    <color name="translucence">#80000000</color>
     <color name="transparency">#00000000</color>
 </resources>

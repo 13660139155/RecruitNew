@@ -8,6 +8,7 @@
     <path
         android:name="ic_clear"
         android:strokeWidth="3"
+        android:strokeLineCap="round"
         android:strokeColor="#ffffff"
         android:pathData="
                             M 10 10
