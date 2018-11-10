@@ -16,20 +16,18 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@null"
-        android:fitsSystemWindows="true"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:layout_marginTop="@dimen/dp_20"
+        android:foreground="?attr/selectableItemBackground"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:background="@null">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/tl_common"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:fitsSystemWindows="true"
             app:navigationIcon="@drawable/ic_arrow_left"
             app:titleTextColor="@color/white"
-            app:title="安卓报名端">
-
-        </androidx.appcompat.widget.Toolbar>
+            app:title="安卓报名端"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -92,7 +90,7 @@
                             app:layout_constraintLeft_toLeftOf="parent"
                             app:layout_constraintRight_toLeftOf="@+id/et_name"/>
 
-                        <EditText
+                        <com.example.hy.recruitnew.widgets.ScrollEditText
                             android:id="@+id/et_name"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -170,7 +168,7 @@
                             app:layout_constraintTop_toBottomOf="@id/btn_school_number"
                             app:layout_constraintRight_toLeftOf="@+id/et_academy"/>
 
-                        <EditText
+                        <com.example.hy.recruitnew.widgets.ScrollEditText
                             android:id="@+id/et_academy"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -197,7 +195,7 @@
                             app:layout_constraintTop_toBottomOf="@id/btn_academy"
                             app:layout_constraintRight_toLeftOf="@+id/et_classes"/>
 
-                        <EditText
+                        <com.example.hy.recruitnew.widgets.ScrollEditText
                             android:id="@+id/et_classes"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -225,7 +223,7 @@
                             app:layout_constraintTop_toBottomOf="@id/btn_classes"
                             app:layout_constraintRight_toLeftOf="@+id/et_business"/>
 
-                        <EditText
+                        <com.example.hy.recruitnew.widgets.ScrollEditText
                             android:id="@+id/et_business"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -266,7 +264,7 @@
                             app:layout_constraintLeft_toLeftOf="parent"
                             app:layout_constraintRight_toLeftOf="@+id/et_phone_number"/>
 
-                        <EditText
+                        <com.example.hy.recruitnew.widgets.ScrollEditText
                             android:id="@+id/et_phone_number"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -292,7 +290,7 @@
                             app:layout_constraintLeft_toLeftOf="parent"
                             app:layout_constraintRight_toLeftOf="@+id/et_qq"/>
 
-                        <EditText
+                        <com.example.hy.recruitnew.widgets.ScrollEditText
                             android:id="@+id/et_qq"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -318,7 +316,7 @@
                             app:layout_constraintLeft_toLeftOf="parent"
                             app:layout_constraintRight_toLeftOf="@+id/et_email"/>
 
-                        <EditText
+                        <com.example.hy.recruitnew.widgets.ScrollEditText
                             android:id="@+id/et_email"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -381,7 +379,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_width="0dp"
                                 android:layout_weight="1"
-                                android:checked="true"
+                                android:checked="false"
                                 android:textColor="@color/white"
                                 android:text="@string/direction_background"/>
 
@@ -578,12 +576,14 @@
                 android:id="@+id/btn_sail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_btn"
                 android:textColor="@color/white"
-                android:textSize="@dimen/sp_20"
-                android:layout_margin="@dimen/dp_20"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/sail"/>
+                android:background="@drawable/bg_btn"
+                android:padding="@dimen/dp_5"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginBottom="@dimen/dp_30"
+                android:textSize="@dimen/sp_18"
+                android:text="@string/sail"
+                android:layout_gravity="center_horizontal"/>
 
         </LinearLayout>
 

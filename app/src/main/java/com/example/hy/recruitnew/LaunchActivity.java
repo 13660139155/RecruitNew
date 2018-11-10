@@ -1,5 +1,6 @@
 package com.example.hy.recruitnew;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,7 +22,7 @@ import butterknife.ButterKnife;
 
 public class LaunchActivity extends AppCompatActivity implements Animation.AnimationListener {
 
-    private static final int ANIM_TIME = 1500;
+    private static final int ANIM_TIME = 1000;
 
     @BindView(R.id.iv_bg)
     ImageView ivBg;
@@ -48,13 +49,12 @@ public class LaunchActivity extends AppCompatActivity implements Animation.Anima
         ButterKnife.bind(this);
 
         AlphaAnimation aa = new AlphaAnimation(0.5f, 1.0f);
-        aa.setDuration(ANIM_TIME * 2);
+        aa.setDuration(ANIM_TIME * 3);
         aa.setAnimationListener(this);
         ivBg.startAnimation(aa);
 
         ScaleAnimation sa = new ScaleAnimation(0, 1, 0, 1, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         sa.setDuration(ANIM_TIME);
-        sa.setInterpolator(new BounceInterpolator());
         ivRecruit.startAnimation(sa);
 
         RotateAnimation ra = new RotateAnimation(180, 360, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
@@ -70,7 +70,12 @@ public class LaunchActivity extends AppCompatActivity implements Animation.Anima
     @Override
     public void onAnimationEnd(Animation animation) {
         Intent intent = new Intent(LaunchActivity.this, MainActivity.class);
-        startActivity(intent);
+        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP){
+            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(LaunchActivity.this, ivRecruit, "ivRecruit").toBundle());
+        }else {
+            startActivity(intent);
+        }
+
         finish();
     }
 

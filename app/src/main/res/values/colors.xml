@@ -9,6 +9,7 @@
     <color name="secondaryText">#757575</color>
     <color name="thirdText">#b9757575</color>
     <color name="background">#32ffffff</color>
+    <color name="menu_background">#7dffffff</color>
     <color name="divier">#34bdbdbd</color>
     <color name="toast_background">#c8535353</color>
     <color name="translucence">#80000000</color>
