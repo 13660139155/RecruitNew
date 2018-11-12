@@ -3,6 +3,7 @@ package com.example.hy.recruitnew.adapter;
 import android.content.Context;
 import android.os.Build;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +12,7 @@ import android.widget.TextView;
 
 import com.example.hy.recruitnew.DetailActivity;
 import com.example.hy.recruitnew.R;
-import com.example.hy.recruitnew.anim.CustomAnimation;
-import com.example.hy.recruitnew.anim.TrunProcess;
+import com.example.hy.recruitnew.util.DisplayUtil;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -27,13 +27,16 @@ import butterknife.ButterKnife;
 public class BaseRvAdapter extends RecyclerView.Adapter<BaseRvAdapter.ViewHolder> {
 
     // 动画转变线
-    private float mTurningLine;
+    private float mTurnLinePosition;
     private RecyclerView mRecyclerView;
     private Context mContext;
+    private float mScreenHeight;
 
     public BaseRvAdapter(Context context) {
         mContext = context;
-        mTurningLine = 300;
+        mTurnLinePosition = 1000;
+        mScreenHeight = DisplayUtil.getScreenHeight(mContext);
+
     }
 
     @NonNull
@@ -83,12 +86,12 @@ public class BaseRvAdapter extends RecyclerView.Adapter<BaseRvAdapter.ViewHolder
                 break;
             default:
                 holder.tvName.setText(R.string.main_bigData);
-                holder.tvName.setVisibility(View.INVISIBLE);
+                holder.tvName.setVisibility(View.GONE);
                 holder.cd1.setVisibility(View.GONE);
-                holder.cd2.setVisibility(View.GONE);
+                holder.cd2.setVisibility(View.INVISIBLE);
                 break;
         }
-       // holder.initListener(mRecyclerView, position);
+        holder.initListener(mRecyclerView, position);
     }
 
     @Override
@@ -114,46 +117,25 @@ public class BaseRvAdapter extends RecyclerView.Adapter<BaseRvAdapter.ViewHolder
         @BindView(R.id.cd_2)
         CardView cd2;
 
-        @BindView(R.id.cl_container)
-        View mItemView;
-        @BindView(R.id.root_view)
-        ViewGroup mViewGroup;
-
         public ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
-
         }
 
         public void initListener(RecyclerView recyclerView, int position){
-            float itemHight = 300;//item高度
-            float recyclerHight = recyclerView.getMeasuredHeight();//rv总高度
-            final float turningPart = recyclerHight - itemHight * 1.5f;
-            float totalScroll = getItemCount() * itemHight - recyclerHight;//滑出屏幕的总距离
-            Log.d("rain", "itemHeight: " + itemHight);
-            Log.d("rain", "recyclerHight: " + recyclerHight);
-            Log.d("rain", "totalScroll: " + totalScroll);
+            float itemHeight = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX, 300, mContext.getResources().getDisplayMetrics());
+            float turnLinePosition = (mScreenHeight - recyclerView.getTop()) / 2 + recyclerView.getTop();
+
             recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
                 @Override
                 public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                     super.onScrolled(recyclerView, dx, dy);
                     float scrollY = getScrollYDistance(recyclerView);
-                    float percent = scrollY / totalScroll;
-                   // mTurningLine = scrollY * recyclerHight / totalScroll;//动画转变线
-                    mTurningLine = itemHight + turningPart * percent;
-                    Log.d("rain", "mTurningLine: "  + mTurningLine);
-                    float itemTop = getItemTop(scrollY, itemHight, position);
-                    int process = TrunProcess.getProcess(itemTop, mTurningLine, itemHight);
-                    Log.d("rain", "process: " + process);
-                    startAnim(mViewGroup, process);
+                    float itemHalf = getItemHalf(scrollY, itemHeight, position);
+                    LinearLayoutManager manager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                    int firstVisibleItemPosition = manager.findFirstVisibleItemPosition();
                 }
             });
-        }
-
-        private void startAnim(ViewGroup viewGroup, int process){
-            CustomAnimation animation = new CustomAnimation();
-            animation.setViewId(R.id.cl_container);
-            animation.setAnimByProcess(viewGroup, process);
         }
 
         /**
@@ -164,6 +146,13 @@ public class BaseRvAdapter extends RecyclerView.Adapter<BaseRvAdapter.ViewHolder
          */
         private float getItemTop(float scrollY, float itemHeight, float position){
             return position * itemHeight - scrollY;
+        }
+
+        /**
+         * 获取item的中部到Recyclerview可见区域的距离
+         */
+        private float getItemHalf(float scrollY, float itemHeight, float position){
+            return position * itemHeight - scrollY + itemHeight / 2;
         }
 
         /**

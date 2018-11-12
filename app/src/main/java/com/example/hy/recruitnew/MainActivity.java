@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewPropertyAnimator;
@@ -13,6 +14,7 @@ import android.view.animation.BounceInterpolator;
 import android.widget.ImageView;
 
 import com.example.hy.recruitnew.adapter.BaseRvAdapter;
+import com.example.hy.recruitnew.util.DisplayUtil;
 import com.example.hy.recruitnew.util.StatusBarUtil;
 import com.example.hy.recruitnew.util.ToastUtil;
 import com.getbase.floatingactionbutton.FloatingActionButton;
@@ -52,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
     private int mLastIndex;
     private boolean isScroll = true;
     private int mFlag = 1;
+    private View mFirstCompleteVisibleView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,40 +62,52 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         StatusBarUtil.compat(this);
         mUnbinder = ButterKnife.bind(this);
-        hideFloatingButton();
+
         mLinearLayoutManager = new LinearLayoutManager(this);
         mLinearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         mBaseRvAdapter = new BaseRvAdapter(this);
         rvMain.setLayoutManager(mLinearLayoutManager);
         rvMain.setAdapter(mBaseRvAdapter);
-        rvMain.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    isScroll = false;
-                }
-            }
 
-            @SuppressLint("RestrictedApi")
+        rvMain.post(new Runnable() {
             @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                isScroll = true;
-                int firstVisibleItemCompletePosition = mLinearLayoutManager.findFirstCompletelyVisibleItemPosition();
-                if (firstVisibleItemCompletePosition == 0) {
-                    hideFloatingButton();
-                } else {
-                    showFloatingButton();
-                }
+            public void run() {
+                rvMain.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                    @Override
+                    public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                        super.onScrollStateChanged(recyclerView, newState);
+                        if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                            isScroll = false;
+                        }
+                    }
+
+                    @SuppressLint("RestrictedApi")
+                    @Override
+                    public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                        super.onScrolled(recyclerView, dx, dy);
+                        isScroll = true;
+
+                        int firstVisibleItemCompletePosition = mLinearLayoutManager.findFirstCompletelyVisibleItemPosition();
+                        if (firstVisibleItemCompletePosition == 0) {
+                            hideFloatingButton();
+                        } else {
+                            showFloatingButton();
+                        }
+
+                    }
+                });
+
             }
         });
-       // fabMain.setOnClickListener(v -> changeBackgoundAlpha(0.5f));
+
         fabAndroid.setOnClickListener(v -> startActivity(1));
         fabBackground.setOnClickListener(v -> startActivity(2));
         fabFront.setOnClickListener(v -> startActivity(3));
         fabBigData.setOnClickListener(v -> startActivity(4));
+
+        fabMain.setTranslationY(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX, 400, getResources().getDisplayMetrics()));
     }
+
 
     @Override
     public void onBackPressed() {
@@ -136,14 +151,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * 改变背景透明度
-     *
-     * @param alpha
+     * 获取item的顶部到Recyclerview可见区域的距离
+     * @param scrollY 垂直滚动出Recyclerview可见区域的距离
+     * @param itemHeight item高度
+     * @param position item位置
      */
-    private void changeBackgoundAlpha(float alpha) {
-        WindowManager.LayoutParams lp = getWindow().getAttributes();
-        lp.alpha = alpha;
-        getWindow().setAttributes(lp);
+    private float getItemTop(float scrollY, float itemHeight, float position){
+        return position * itemHeight - scrollY;
+    }
+
+    /**
+     * 获取垂直滚动出Recyclerview可见区域的距离
+     */
+    private float getScrollYDistance(RecyclerView recyclerView){
+        View firstVisibleItem = recyclerView.getChildAt(0);
+        int itemHeight = firstVisibleItem.getMeasuredHeight();//得到item高度
+        LinearLayoutManager manager = (LinearLayoutManager) recyclerView.getLayoutManager();
+        assert manager != null;
+        int firstVisibleItemPosition = manager.findFirstVisibleItemPosition();//得到第一个item位置
+        int firstVisibleBottom = manager.getDecoratedBottom(firstVisibleItem);//得到第一个item底部位置（距离父控件底部开始）
+        return (firstVisibleItemPosition + 1) * itemHeight - firstVisibleBottom;
     }
 
     private void startActivity(int flag) {
