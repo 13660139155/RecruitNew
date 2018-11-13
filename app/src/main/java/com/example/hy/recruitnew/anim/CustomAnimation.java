@@ -1,5 +1,6 @@
 package com.example.hy.recruitnew.anim;
 
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -9,52 +10,63 @@ import android.view.ViewGroup;
  */
 public class CustomAnimation {
 
-    //没有控件
-    private static final int NO_VIEW = -1;
-    //控件id
-    private int mViewID = NO_VIEW;
-    // 动画进度
-    private int mProcess = 0;
+    //非法值
+    private static final int VAL = -1;
 
-    private boolean enableAlpha = true;
-    private boolean enableScale = true;
+    // 动画进度
+    private float mProcess = 0;
+    private float mHalf = VAL;
 
     public CustomAnimation(){
     }
 
     /**
      * 通过进度控制动画
-     * @param viewGroup 父容器
-     * @param process 动画变化进度
      */
-    public void setAnimByProcess(ViewGroup viewGroup, int process){
-        if (viewGroup == null) return;
-        mProcess = process;
+    public void setAnimByProcess(View view, float process){
+        if (view == null) return;
 
         //控制透明度
-        if (enableAlpha && mViewID != NO_VIEW) {
-            View view = viewGroup.findViewById(mViewID);
-            if (process > 0 && process <= 25){
-                float alpha = (25 - process) / 25.0f;
-                view.setAlpha(alpha);
-            }else if(process > 75 && process <= 100){
-                float alpha = (process - 75) / 25.0f;
-                view.setAlpha(alpha);
-            }
+        float alpha;
+        if (process < 0.5){
+            alpha = 0.5f;
+        }else if(process > 0.9){
+            alpha = 1f;
+        }else {
+            alpha = process;
         }
+        view.setAlpha(alpha);
 
         //控制大小
-        if(enableScale && mViewID != NO_VIEW){
-            View view = viewGroup.findViewById(mViewID);
+        float scale;
+        if (process < 0.8){
+            scale = 0.8f;
+            view.setScaleX(scale);
+            view.setScaleY(scale);
+        }else if(process > 0.9){
+            view.setScaleX(process);
+            view.setScaleY(process);
+            if(process < 1f){
+                alpha = 1f;
+                view.setScaleX(alpha);
+                view.setScaleY(alpha);
+            }
 
+        }else {
+            scale = process;
+            view.setScaleX(scale);
+            view.setScaleY(scale);
         }
+
     }
 
-    public int getViewId() {
-        return mViewID;
-    }
-
-    public void setViewId(int viewId) {
-        this.mViewID = viewId;
+    /** *
+     *  返回动画完成的进度
+     */
+    public float getProcess(float itemHalf, float turningLine, float recyclerHeight) {
+        float process;
+        process = (recyclerHeight - Math.abs(itemHalf - turningLine)) / recyclerHeight;
+        Log.d("rain", "process: " + process);
+        return process;
     }
 }
