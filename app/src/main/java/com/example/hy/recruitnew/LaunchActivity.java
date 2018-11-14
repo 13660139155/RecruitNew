@@ -7,16 +7,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.view.animation.BounceInterpolator;
 import android.view.animation.RotateAnimation;
 import android.view.animation.ScaleAnimation;
-import android.view.animation.Transformation;
+import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.lang.annotation.Annotation;
-
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.Guideline;
+import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -30,6 +29,10 @@ public class LaunchActivity extends AppCompatActivity implements Animation.Anima
     ImageView ivRecruit;
     @BindView(R.id.tv_recruit)
     TextView tvRecruit;
+    @BindView(R.id.gl_v)
+    Guideline glV;
+    @BindView(R.id.iv_rdc)
+    ImageView ivRdc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +63,11 @@ public class LaunchActivity extends AppCompatActivity implements Animation.Anima
         RotateAnimation ra = new RotateAnimation(180, 360, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         ra.setDuration(ANIM_TIME);
         tvRecruit.startAnimation(ra);
+
+        TranslateAnimation ta = new TranslateAnimation(0, 0, 1500, 0);
+        ta.setDuration(ANIM_TIME);
+        ta.setInterpolator(new FastOutSlowInInterpolator());
+        ivRdc.startAnimation(ta);
     }
 
     @Override
@@ -70,9 +78,9 @@ public class LaunchActivity extends AppCompatActivity implements Animation.Anima
     @Override
     public void onAnimationEnd(Animation animation) {
         Intent intent = new Intent(LaunchActivity.this, MainActivity.class);
-        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP){
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(LaunchActivity.this, ivRecruit, "ivRecruit").toBundle());
-        }else {
+        } else {
             startActivity(intent);
         }
 

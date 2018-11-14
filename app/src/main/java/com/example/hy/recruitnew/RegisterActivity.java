@@ -77,8 +77,8 @@ public class RegisterActivity extends AppCompatActivity {
 
     private Unbinder mUnbinder;
     private static final String KEY_TITLE = "keyTitle";
-    private int mDirectionId1, mDirectionId2;
-    private RadioButton mRadioButton1, mRadioButton2;
+    private int mDirectionId = -1;
+    private RadioButton mRadioButton = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,21 +103,11 @@ public class RegisterActivity extends AppCompatActivity {
         tlCommon.setNavigationOnClickListener(v -> finish());
 
         //选中按钮
-        rgDirection.setOnCheckedChangeListener(((group, checkedId) -> {
-            if(mRadioButton2 != null ) mRadioButton2.setChecked(false);
-            mDirectionId1 = group.getCheckedRadioButtonId();
-            mRadioButton1 = findViewById(mDirectionId1);
-        }));
-        rgDirection2.setOnCheckedChangeListener(((group, checkedId) -> {
-            if(mRadioButton1 != null) mRadioButton1.setChecked(false);
-            mDirectionId2 = group.getCheckedRadioButtonId();
-            mRadioButton2 = findViewById(mDirectionId2);
-        }));
+        rgDirection.setOnCheckedChangeListener(((group, checkedId) -> selectChecked(group)));
+        rgDirection2.setOnCheckedChangeListener(((group, checkedId) -> selectChecked(group)));
 
         //提交按钮
-        btnSail.setOnClickListener(v -> {
-            register();
-        });
+        btnSail.setOnClickListener(v -> register());
 
     }
 
@@ -141,6 +131,23 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     /**
+     * 切换选中按钮
+     */
+    private void selectChecked(RadioGroup group) {
+        if(mDirectionId != -1){
+            mRadioButton = group.findViewById(mDirectionId);
+            if(mRadioButton == null){
+                mRadioButton = findViewById(mDirectionId);
+                mRadioButton.setChecked(false);
+                mDirectionId = group.getCheckedRadioButtonId();
+                mRadioButton = group.findViewById(mDirectionId);
+                mRadioButton.setChecked(true);
+            }
+        }
+        mDirectionId = group.getCheckedRadioButtonId();
+    }
+
+    /**
      * 提交报名表
      */
     private void register() {
@@ -152,7 +159,7 @@ public class RegisterActivity extends AppCompatActivity {
             ToastUtil.showToast(this, getString(R.string.register_error));
             return;
         }
-        if(mRadioButton1 == null && mRadioButton2 == null){
+        if(mRadioButton == null){
             ToastUtil.showToast(this, getString(R.string.register_error3));
             return;
         }
@@ -168,12 +175,7 @@ public class RegisterActivity extends AppCompatActivity {
         registerData.setSpectiality(getEtString(etSpectiality));
         registerData.setSpectiality(getEtString(etSelfIntroduction));
         registerData.setExpection(getEtString(etExpection));
-        if(mRadioButton1 != null && mRadioButton1.isChecked()){
-            registerData.setDirection(mRadioButton1.getText().toString());
-        }
-        if(mRadioButton2 != null && mRadioButton2.isChecked()){
-            registerData.setDirection(mRadioButton2.getText().toString());
-        }
+        registerData.setDirection(mRadioButton.getText().toString());
         registerData.save(new SaveListener<String>() {
             @Override
             public void done(String s, BmobException e) {

@@ -89,7 +89,7 @@
     <string name="main_front_text">      \t\t\t\t基于HTML/CSS/JS开发专注于网站界面以及提供更好的视觉冲击和用户体验。</string>
     <string name="main_bigData_text">       \t\t\t\t挖掘数据、分析数据。既专注于基础，又落实于项目，既沉浸于原理，又回归到兴趣。</string>
     <string name="main_rdc_text">        \t\t\t\t2001年，研发中心成立，至今已经17年历史，是计算机学院一个最为老牌的团队。</string>
-    <string name="launch_recruit">正在招新</string>
+    <string name="launch_recruit">正在\n招新</string>
 
     //other
     <string name="exit_app">再按一次退出研发招新</string>
