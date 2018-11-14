@@ -9,8 +9,8 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/star"
-        android:scaleType="centerCrop"
+        android:src="@mipmap/star"
+        android:scaleType="fitXY"
         tools:ignore="ContentDescription" />
 
     <com.google.android.material.appbar.AppBarLayout
@@ -384,7 +384,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_width="0dp"
                                     android:layout_weight="1"
-                                    android:checked="false"
+                                    android:checked="true"
                                     android:textColor="@color/white"
                                     android:text="@string/direction_background"/>
 

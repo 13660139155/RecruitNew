@@ -21,8 +21,6 @@ import butterknife.ButterKnife;
 
 public class LaunchActivity extends AppCompatActivity implements Animation.AnimationListener {
 
-    private static final int ANIM_TIME = 1000;
-
     @BindView(R.id.iv_bg)
     ImageView ivBg;
     @BindView(R.id.iv_recruit)
@@ -37,35 +35,24 @@ public class LaunchActivity extends AppCompatActivity implements Animation.Anima
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (Build.VERSION.SDK_INT >= 19) {
-            View decorView = getWindow().getDecorView();
-            decorView.setSystemUiVisibility(
-                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                            | View.SYSTEM_UI_FLAG_FULLSCREEN
-                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-            );
-        }
         setContentView(R.layout.activity_launch);
         ButterKnife.bind(this);
 
         AlphaAnimation aa = new AlphaAnimation(0.5f, 1.0f);
-        aa.setDuration(ANIM_TIME * 3);
+        aa.setDuration(3000);
         aa.setAnimationListener(this);
         ivBg.startAnimation(aa);
 
         ScaleAnimation sa = new ScaleAnimation(0, 1, 0, 1, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-        sa.setDuration(ANIM_TIME);
+        sa.setDuration(1200);
         ivRecruit.startAnimation(sa);
 
         RotateAnimation ra = new RotateAnimation(180, 360, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-        ra.setDuration(ANIM_TIME);
+        ra.setDuration(1200);
         tvRecruit.startAnimation(ra);
 
         TranslateAnimation ta = new TranslateAnimation(0, 0, 1500, 0);
-        ta.setDuration(ANIM_TIME);
+        ta.setDuration(1200);
         ta.setInterpolator(new FastOutSlowInInterpolator());
         ivRdc.startAnimation(ta);
     }

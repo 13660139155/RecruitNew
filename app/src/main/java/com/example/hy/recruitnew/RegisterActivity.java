@@ -102,9 +102,43 @@ public class RegisterActivity extends AppCompatActivity {
         setToolbatTitle(flag);
         tlCommon.setNavigationOnClickListener(v -> finish());
 
+        mDirectionId = rbBackground.getId();
+        mRadioButton = rbBackground;
         //选中按钮
-        rgDirection.setOnCheckedChangeListener(((group, checkedId) -> selectChecked(group)));
-        rgDirection2.setOnCheckedChangeListener(((group, checkedId) -> selectChecked(group)));
+        rgDirection.setOnCheckedChangeListener(((group, checkedId) -> {
+            if(rbBackground.getId() == mDirectionId){
+                mRadioButton = rbFront;
+            }else if(rbFront.getId() == mDirectionId){
+                mRadioButton = rbBackground;
+            }else {
+                mRadioButton = findViewById(mDirectionId);
+                mRadioButton.setChecked(false);
+                mDirectionId = group.getCheckedRadioButtonId();
+                mRadioButton = findViewById(mDirectionId);
+                mRadioButton.setChecked(true);
+                Log.d("rain", "button: " + mRadioButton.getText().toString());
+                return;
+            }
+            mDirectionId = group.getCheckedRadioButtonId();
+            Log.d("rain", "button: " + mRadioButton.getText().toString());
+        }));
+        rgDirection2.setOnCheckedChangeListener(((group, checkedId) -> {
+            if(rbAndroid.getId() == mDirectionId){
+                mRadioButton = rbBigData;
+            }else if(rbBigData.getId() == mDirectionId){
+                mRadioButton = rbAndroid;
+            }else {
+                mRadioButton = findViewById(mDirectionId);
+                mRadioButton.setChecked(false);
+                mDirectionId = group.getCheckedRadioButtonId();
+                mRadioButton = findViewById(mDirectionId);
+                mRadioButton.setChecked(true);
+                Log.d("rain", "button: " + mRadioButton.getText().toString());
+                return;
+            }
+            mDirectionId = group.getCheckedRadioButtonId();
+            Log.d("rain", "button: " + mRadioButton.getText().toString());
+        }));
 
         //提交按钮
         btnSail.setOnClickListener(v -> register());
@@ -128,23 +162,6 @@ public class RegisterActivity extends AppCompatActivity {
         Intent intent = new Intent(context, RegisterActivity.class);
         intent.putExtra(KEY_TITLE, flag);
         context.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation((Activity)context).toBundle());
-    }
-
-    /**
-     * 切换选中按钮
-     */
-    private void selectChecked(RadioGroup group) {
-        if(mDirectionId != -1){
-            mRadioButton = group.findViewById(mDirectionId);
-            if(mRadioButton == null){
-                mRadioButton = findViewById(mDirectionId);
-                mRadioButton.setChecked(false);
-                mDirectionId = group.getCheckedRadioButtonId();
-                mRadioButton = group.findViewById(mDirectionId);
-                mRadioButton.setChecked(true);
-            }
-        }
-        mDirectionId = group.getCheckedRadioButtonId();
     }
 
     /**
