@@ -27,73 +27,76 @@ import butterknife.ButterKnife;
 /**
  * Created by 陈健宇 at 2018/11/9
  */
-public class BaseRvAdapter extends RecyclerView.Adapter<BaseRvAdapter.ViewHolder> {
+public class BaseRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     // 动画转变线
-    private float mTurnLinePosition;
     private RecyclerView mRecyclerView;
     private Context mContext;
-    private float mScreenHeight;
 
     public BaseRvAdapter(Context context) {
         mContext = context;
-        mTurnLinePosition = 1000;
-        mScreenHeight = DisplayUtil.getScreenHeight(mContext);
-
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         mRecyclerView = (RecyclerView) parent;
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_main, null, false);
-        ViewHolder holder = new ViewHolder(view);
-        holder.ivLogo.setOnClickListener(v -> {
-            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-                DetailActivity.startActivityByShareMore(parent.getContext(), viewType, holder.ivLogo, holder.cd2);
-            } else {
-                DetailActivity.startActivity(parent.getContext(), viewType);
-            }
-        });
-        holder.initListener(mRecyclerView, viewType);
-        return holder;
+        View view;
+        if(viewType == 0){
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.head, null, false);
+            return new HeadHolder(view);
+        }else {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_main, null, false);
+            ViewHolder holder = new ViewHolder(view);
+            holder.ivLogo.setOnClickListener(v -> {
+                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+                    DetailActivity.startActivityByShareMore(parent.getContext(), viewType - 1, holder.ivLogo, holder.cd2);
+                } else {
+                    DetailActivity.startActivity(parent.getContext(), viewType - 1);
+                }
+            });
+            holder.initListener(mRecyclerView, viewType);
+            return holder;
+        }
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
-        switch (position) {
-            case 0:
-                holder.tvName.setText(R.string.main_rdc);
-                holder.ivLogo.setImageResource(R.drawable.logo_rdc);
-                holder.tvSome.setText(R.string.main_rdc_text);
-                break;
-            case 1:
-                holder.tvName.setText(R.string.main_android);
-                holder.ivLogo.setImageResource(R.drawable.logo_android);
-                holder.tvSome.setText(R.string.main_android_text);
-                break;
-            case 2:
-                holder.tvName.setText(R.string.main_background);
-                holder.ivLogo.setImageResource(R.drawable.logo_background);
-                holder.tvSome.setText(R.string.main_background_text);
-                break;
-            case 3:
-                holder.tvName.setText(R.string.main_front);
-                holder.ivLogo.setImageResource(R.drawable.logo_front);
-                holder.tvSome.setText(R.string.main_front_text);
-                break;
-            case 4:
-                holder.tvName.setText(R.string.main_bigData);
-                holder.ivLogo.setImageResource(R.drawable.logo_bigdata);
-                holder.tvSome.setText(R.string.main_bigData_text);
-                break;
-            default:
-                holder.tvName.setText(R.string.main_bigData);
-                holder.tvName.setVisibility(View.GONE);
-                holder.cd1.setVisibility(View.GONE);
-                holder.cd2.setVisibility(View.INVISIBLE);
-                break;
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
+        if(viewHolder instanceof ViewHolder){
+            ViewHolder holder = (ViewHolder)viewHolder;
+            switch (position) {
+                case 1:
+                    holder.tvName.setText(R.string.main_rdc);
+                    holder.ivLogo.setImageResource(R.drawable.logo_rdc);
+                    holder.tvSome.setText(R.string.main_rdc_text);
+                    break;
+                case 2:
+                    holder.tvName.setText(R.string.main_android);
+                    holder.ivLogo.setImageResource(R.drawable.logo_android);
+                    holder.tvSome.setText(R.string.main_android_text);
+                    break;
+                case 3:
+                    holder.tvName.setText(R.string.main_background);
+                    holder.ivLogo.setImageResource(R.drawable.logo_background);
+                    holder.tvSome.setText(R.string.main_background_text);
+                    break;
+                case 4:
+                    holder.tvName.setText(R.string.main_front);
+                    holder.ivLogo.setImageResource(R.drawable.logo_front);
+                    holder.tvSome.setText(R.string.main_front_text);
+                    break;
+                case 5:
+                    holder.tvName.setText(R.string.main_bigData);
+                    holder.ivLogo.setImageResource(R.drawable.logo_bigdata);
+                    holder.tvSome.setText(R.string.main_bigData_text);
+                    break;
+                default:
+                    holder.tvName.setText(R.string.main_bigData);
+                    holder.tvName.setVisibility(View.GONE);
+                    holder.cd1.setVisibility(View.GONE);
+                    holder.cd2.setVisibility(View.INVISIBLE);
+                    break;
+            }
         }
     }
 
@@ -104,7 +107,14 @@ public class BaseRvAdapter extends RecyclerView.Adapter<BaseRvAdapter.ViewHolder
 
     @Override
     public int getItemCount() {
-        return 6;
+        return 7;
+    }
+
+    class HeadHolder extends RecyclerView.ViewHolder{
+
+        public HeadHolder(@NonNull View itemView) {
+            super(itemView);
+        }
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

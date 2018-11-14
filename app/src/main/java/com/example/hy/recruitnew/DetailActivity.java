@@ -168,11 +168,13 @@ public class DetailActivity extends AppCompatActivity {
             if (isVisible) {
                 isVisible = false;
                 clReveal.setVisibility(View.INVISIBLE);
-                ctlBar.setTitle(" ");
+                ivDetail.setVisibility(View.VISIBLE);
+                ctlBar.setTitle(detail);
             } else {
                 isVisible = true;
+                ivDetail.setVisibility(View.INVISIBLE);
+                ctlBar.setTitle("  ");
                 clReveal.setVisibility(View.VISIBLE);
-                ctlBar.setTitle(detail);
             }
         }
 

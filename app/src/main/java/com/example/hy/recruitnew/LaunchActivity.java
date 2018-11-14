@@ -66,11 +66,10 @@ public class LaunchActivity extends AppCompatActivity implements Animation.Anima
     public void onAnimationEnd(Animation animation) {
         Intent intent = new Intent(LaunchActivity.this, MainActivity.class);
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(LaunchActivity.this, ivRecruit, "ivRecruit").toBundle());
+            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(LaunchActivity.this).toBundle());
         } else {
             startActivity(intent);
         }
-
         finish();
     }
 

@@ -4,10 +4,14 @@ import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.transition.Explode;
+import android.transition.Fade;
+import android.transition.Slide;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewPropertyAnimator;
+import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.BounceInterpolator;
@@ -32,8 +36,6 @@ public class MainActivity extends AppCompatActivity {
 
     private static final long WAIT_TIME = 2000L; // 再点一次退出程序时间设置
     private static long TOUCH_TIME = 0;//第一次按下返回键的时间
-    @BindView(R.id.iv_main)
-    ImageView ivMain;
     @BindView(R.id.fab_android)
     FloatingActionButton fabAndroid;
     @BindView(R.id.fab_background)
@@ -51,14 +53,14 @@ public class MainActivity extends AppCompatActivity {
     private Unbinder mUnbinder;
     private BaseRvAdapter mBaseRvAdapter;
     private LinearLayoutManager mLinearLayoutManager;
-    private int mLastIndex;
-    private boolean isScroll = true;
-    private int mFlag = 1;
-    private View mFirstCompleteVisibleView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+            getWindow().setEnterTransition(new Explode());
+        }
         setContentView(R.layout.activity_main);
         StatusBarUtil.compat(this);
         mUnbinder = ButterKnife.bind(this);
@@ -77,7 +79,6 @@ public class MainActivity extends AppCompatActivity {
                     public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                         super.onScrollStateChanged(recyclerView, newState);
                         if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                            isScroll = false;
                         }
                     }
 
@@ -85,10 +86,8 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                         super.onScrolled(recyclerView, dx, dy);
-                        isScroll = true;
-
                         int firstVisibleItemCompletePosition = mLinearLayoutManager.findFirstCompletelyVisibleItemPosition();
-                        if (firstVisibleItemCompletePosition == 0) {
+                        if (firstVisibleItemCompletePosition == 1) {
                             hideFloatingButton();
                         } else {
                             showFloatingButton();
