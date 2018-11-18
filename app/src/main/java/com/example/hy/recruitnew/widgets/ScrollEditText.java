@@ -84,7 +84,9 @@ public class ScrollEditText extends EditText implements
             if(getCompoundDrawables()[2] != null){
                 boolean isTouch =
                         event.getX() > getWidth() - getPaddingRight() - mClearDrawable.getIntrinsicWidth() &&
-                        event.getX() < getWidth() - getPaddingRight();
+                        event.getX() < getWidth() - getPaddingRight() &&
+                        event.getY() > getHeight() - getHeight() / 2  - mClearDrawable.getIntrinsicHeight() / 2 &&
+                        event.getY() < getHeight() - getHeight() / 2 + mClearDrawable.getIntrinsicHeight() / 2;
                 if(isTouch){
                     this.setText("");
                     setClearIconVisible(false);

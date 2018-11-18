@@ -20,7 +20,8 @@ public class StatusBarUtil {
         public static void compat(Activity activity, int statusColor) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 activity.getWindow().getDecorView().setSystemUiVisibility(
-                        View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN |
+                                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                 );
                 if(INVALID_VAL == statusColor) return;
                 activity.getWindow().setStatusBarColor(statusColor);
