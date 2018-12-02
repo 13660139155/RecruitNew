@@ -70,11 +70,8 @@ public class LaunchActivity extends AppCompatActivity implements Animation.Anima
     @Override
     public void onAnimationEnd(Animation animation) {
         Intent intent = new Intent(LaunchActivity.this, MainActivity.class);
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(LaunchActivity.this).toBundle());
-        } else {
-            startActivity(intent);
-        }
+        startActivity(intent);
+        overridePendingTransition(R.anim.anim_open_enter2, 0);
         finish();
     }
 

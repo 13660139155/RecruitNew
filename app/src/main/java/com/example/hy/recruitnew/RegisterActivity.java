@@ -102,8 +102,6 @@ public class RegisterActivity extends AppCompatActivity {
         setToolbatTitle(flag);
         tlCommon.setNavigationOnClickListener(v -> finish());
 
-        mDirectionId = rbBackground.getId();
-        mRadioButton = rbBackground;
         //选中按钮
         rgDirection.setOnCheckedChangeListener(((group, checkedId) -> {
             if(rbBackground.getId() == mDirectionId){
@@ -231,15 +229,27 @@ public class RegisterActivity extends AppCompatActivity {
         switch (flag) {
             case 1:
                 tlCommon.setTitle(R.string.register_android);
+                mDirectionId = rbAndroid.getId();
+                mRadioButton = rbAndroid;
+                mRadioButton.setChecked(true);
                 break;
             case 2:
                 tlCommon.setTitle(R.string.register_background);
+                mDirectionId = rbBackground.getId();
+                mRadioButton = rbBackground;
+                mRadioButton.setChecked(true);
                 break;
             case 3:
                 tlCommon.setTitle(R.string.register_front);
+                mDirectionId = rbFront.getId();
+                mRadioButton = rbFront;
+                mRadioButton.setChecked(true);
                 break;
             case 4:
                 tlCommon.setTitle(R.string.register_bigData);
+                mDirectionId = rbBigData.getId();
+                mRadioButton = rbBigData;
+                mRadioButton.setChecked(true);
                 break;
             default:
                 tlCommon.setTitle("");

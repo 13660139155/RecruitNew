@@ -18,6 +18,8 @@ import android.view.animation.BounceInterpolator;
 import android.widget.ImageView;
 
 import com.example.hy.recruitnew.adapter.BaseRvAdapter;
+import com.example.hy.recruitnew.decoration.ItemDecoration;
+import com.example.hy.recruitnew.manager.CenterLayoutManager;
 import com.example.hy.recruitnew.util.DisplayUtil;
 import com.example.hy.recruitnew.util.StatusBarUtil;
 import com.example.hy.recruitnew.util.ToastUtil;
@@ -27,6 +29,8 @@ import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSnapHelper;
+import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -65,11 +69,19 @@ public class MainActivity extends AppCompatActivity {
         StatusBarUtil.compat(this);
         mUnbinder = ButterKnife.bind(this);
 
-        mLinearLayoutManager = new LinearLayoutManager(this);
+        mLinearLayoutManager = new CenterLayoutManager(this);
         mLinearLayoutManager.setOrientation(RecyclerView.VERTICAL);
-        mBaseRvAdapter = new BaseRvAdapter(this);
+        mBaseRvAdapter = new BaseRvAdapter();
         rvMain.setLayoutManager(mLinearLayoutManager);
         rvMain.setAdapter(mBaseRvAdapter);
+
+        LinearSnapHelper linearSnapHelper = new LinearSnapHelper();
+        linearSnapHelper.attachToRecyclerView(rvMain);
+        rvMain.addItemDecoration(new ItemDecoration());
+        mBaseRvAdapter.setItemClickListener(postion -> rvMain.smoothScrollToPosition(postion));
+
+//        PagerSnapHelper pagerSnapHelper = new PagerSnapHelper();
+//        pagerSnapHelper.attachToRecyclerView(rvMain);
 
         rvMain.post(new Runnable() {
             @Override
@@ -78,8 +90,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                         super.onScrollStateChanged(recyclerView, newState);
-                        if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                        }
+
                     }
 
                     @SuppressLint("RestrictedApi")
@@ -95,7 +106,6 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                 });
-
             }
         });
 

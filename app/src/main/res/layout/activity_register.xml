@@ -383,7 +383,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_width="0dp"
                                     android:layout_weight="1"
-                                    android:checked="true"
+                                    android:checked="false"
                                     android:textColor="@color/white"
                                     android:text="@string/direction_background"/>
 

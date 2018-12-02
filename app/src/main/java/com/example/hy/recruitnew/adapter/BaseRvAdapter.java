@@ -2,8 +2,6 @@ package com.example.hy.recruitnew.adapter;
 
 import android.content.Context;
 import android.os.Build;
-import android.util.Log;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +12,6 @@ import android.widget.TextView;
 import com.example.hy.recruitnew.DetailActivity;
 import com.example.hy.recruitnew.R;
 import com.example.hy.recruitnew.anim.CustomAnimation;
-import com.example.hy.recruitnew.util.DisplayUtil;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -31,11 +28,10 @@ public class BaseRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     // 动画转变线
     private RecyclerView mRecyclerView;
-    private Context mContext;
+    private ItemClickListener mItemClickListener;
+    private int mCompleteVisibileItemPosition = -1;
 
-    public BaseRvAdapter(Context context) {
-        mContext = context;
-    }
+    public BaseRvAdapter() {}
 
     @NonNull
     @Override
@@ -48,14 +44,33 @@ public class BaseRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }else {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_main, null, false);
             ViewHolder holder = new ViewHolder(view);
+
+            holder.tvSome.setOnClickListener(v -> {
+                if(mItemClickListener == null) return;
+                mItemClickListener.onClick(viewType);
+            });
+
+            holder.tvName.setOnClickListener(v -> {
+                if(mItemClickListener == null) return;
+                mItemClickListener.onClick(viewType);
+            });
+
             holder.ivLogo.setOnClickListener(v -> {
+                if(mItemClickListener != null && mCompleteVisibileItemPosition != -1 && mCompleteVisibileItemPosition != viewType){
+                    mItemClickListener.onClick(viewType);
+                    return;
+                }
                 if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
                     DetailActivity.startActivityByShareMore(parent.getContext(), viewType - 1, holder.ivLogo, holder.cd2);
                 } else {
                     DetailActivity.startActivity(parent.getContext(), viewType - 1);
                 }
+                if(mItemClickListener != null)
+                    mItemClickListener.onClick(viewType);
             });
+
             holder.initListener(mRecyclerView, viewType);
+
             return holder;
         }
     }
@@ -91,10 +106,6 @@ public class BaseRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     holder.tvSome.setText(R.string.main_bigData_text);
                     break;
                 default:
-                    holder.tvName.setText(R.string.main_bigData);
-                    holder.tvName.setVisibility(View.GONE);
-                    holder.cd1.setVisibility(View.GONE);
-                    holder.cd2.setVisibility(View.INVISIBLE);
                     break;
             }
         }
@@ -107,12 +118,20 @@ public class BaseRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public int getItemCount() {
-        return 7;
+        return 6;
+    }
+
+    public void setItemClickListener(ItemClickListener itemClickListener){
+        mItemClickListener = itemClickListener;
+    }
+
+    public interface ItemClickListener{
+        void onClick(int postion);
     }
 
     class HeadHolder extends RecyclerView.ViewHolder{
 
-        public HeadHolder(@NonNull View itemView) {
+        HeadHolder(@NonNull View itemView) {
             super(itemView);
         }
     }
@@ -137,15 +156,22 @@ public class BaseRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         private CustomAnimation mCustomAnimation;
         private View mItemView;
 
-        public ViewHolder(View view) {
+        ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
             mItemView = view;
             mCustomAnimation = new CustomAnimation();
         }
 
-        public void initListener(RecyclerView recyclerView, int position) {
+        void initListener(RecyclerView recyclerView, int position) {
             recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+
+                @Override
+                public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                    if(newState == RecyclerView.SCROLL_STATE_IDLE)
+                        mCompleteVisibileItemPosition = ((LinearLayoutManager)recyclerView.getLayoutManager()).findLastCompletelyVisibleItemPosition();
+                }
+
                 @Override
                 public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                     super.onScrolled(recyclerView, dx, dy);
@@ -155,15 +181,8 @@ public class BaseRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     int lastVisibleItemPosition = manager.findLastVisibleItemPosition();
                     if (firstVisibleItemPosition <= position && position <= lastVisibleItemPosition) {
                         float turnLinePosition = recyclerView.getHeight() / 2;
-                        float scrollY = getScrollYDistance(recyclerView);
                         float itemHalf = getItemHalf(mItemView.getTop(), mItemView.getBottom());;
                         if(position == 0) itemHalf *= 2;
-                        Log.d("rain", position + ": " + manager.findViewByPosition(position));
-                        Log.d("rain", "recyclerviewTop: " + recyclerView.getTop() + ",top: " + mItemView.getTop() + ",bottom" + mItemView.getBottom());
-                        Log.d("rain", "scrollY: " + scrollY);
-                        Log.d("rain", "itemHalf: " + getItemHalf(mItemView.getTop(), mItemView.getBottom()));
-                        Log.d("rain", "recyclerHeight: " + recyclerView.getHeight());
-                        Log.d("rain", "turnPosition: " + turnLinePosition);
                         mCustomAnimation.setAnimByProcess(mItemView,  mCustomAnimation.getProcess(itemHalf, turnLinePosition, recyclerView.getHeight()));
 
                     }
@@ -187,8 +206,6 @@ public class BaseRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         private float getItemHalf(float top, float bottom) {
             return (bottom - top) / 2 + top;
         }
-
-
 
         /**
          * 获取垂直滚动出Recyclerview可见区域的距离
