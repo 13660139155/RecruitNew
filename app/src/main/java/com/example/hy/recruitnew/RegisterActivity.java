@@ -17,10 +17,9 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.example.hy.recruitnew.bean.RegisterData;
-import com.example.hy.recruitnew.util.StatusBarUtil;
-import com.example.hy.recruitnew.util.ToastUtil;
+import com.example.utilslibrary.StatusBarUtil;
+import com.example.utilslibrary.ToastUtil;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.widget.NestedScrollView;

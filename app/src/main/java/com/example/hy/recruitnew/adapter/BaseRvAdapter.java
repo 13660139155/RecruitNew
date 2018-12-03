@@ -1,6 +1,5 @@
 package com.example.hy.recruitnew.adapter;
 
-import android.content.Context;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;

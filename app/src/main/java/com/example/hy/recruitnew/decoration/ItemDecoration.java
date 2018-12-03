@@ -5,7 +5,6 @@ import android.graphics.Rect;
 import android.util.TypedValue;
 import android.view.View;
 
-import com.example.hy.recruitnew.util.DisplayUtil;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;

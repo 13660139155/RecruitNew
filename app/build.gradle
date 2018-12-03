@@ -43,6 +43,7 @@ dependencies {
 
     implementation 'com.getbase:floatingactionbutton:1.10.1'
     implementation 'com.lcodecorex:tkrefreshlayout:1.0.7'
+    implementation 'com.github.rain9155:RUtils:v1.0'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.0'
