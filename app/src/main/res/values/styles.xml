@@ -3,7 +3,7 @@
     <!-- Base application theme. -->
     <style name="BaseAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimary">@color/transparency</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowAnimationStyle">@style/ActivityAnimation</item>
@@ -29,13 +29,10 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
-    <!-- 解决启动页白屏的问题 -->
     <style name="LauncherTheme" parent="AppTheme">
-        <item name="windowNoTitle">true</item>
-        <item name="windowActionBar">false</item>
-        <item name="android:windowFullscreen">true</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@color/transparency</item>
+        <!--<item name="android:windowFullscreen">true</item>-->
     </style>
 
 </resources>

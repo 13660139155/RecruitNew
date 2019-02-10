@@ -9,18 +9,19 @@ import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Pair;
+import android.view.DisplayCutout;
 import android.view.View;
 import android.view.ViewAnimationUtils;
+import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.example.utilslibrary.StatusBarUtil;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -28,6 +29,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -69,7 +71,7 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-        StatusBarUtil.compat(this);
+
         mUnbinder = ButterKnife.bind(this);
         setSupportActionBar(toolbar);
 
@@ -79,10 +81,14 @@ public class DetailActivity extends AppCompatActivity {
         }
 
         setText(flag);
+        if(Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP)
+            ivDetail.getDrawable().mutate().setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
 
         fab.setOnClickListener(v -> {
-            if (flag == 0) launchRevealAnimation();
-            else startActivity(flag);
+            if (flag == 0)
+                launchRevealAnimation();
+            else
+                startActivity(flag);
         });
 
         btnAndroid.setOnClickListener(v -> startActivity(1));
@@ -90,7 +96,13 @@ public class DetailActivity extends AppCompatActivity {
         btnFront.setOnClickListener(v -> startActivity(3));
         btnBigData.setOnClickListener(v -> startActivity(4));
 
-        toolbar.setNavigationOnClickListener(v -> finish());
+        toolbar.setNavigationOnClickListener(v -> {
+            if(isVisible)
+                launchRevealAnimation();
+            else
+                finish();
+
+        });
 
         isVisible = clReveal.getVisibility() == View.VISIBLE;
     }
@@ -111,8 +123,10 @@ public class DetailActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if(isVisible) launchRevealAnimation();
-        else super.onBackPressed();
+        if(isVisible)
+            launchRevealAnimation();
+        else
+            super.onBackPressed();
     }
 
     /**
@@ -164,16 +178,47 @@ public class DetailActivity extends AppCompatActivity {
                 ctlBar.setTitle(" ");
             }
         } else {
+            ObjectAnimator showAnim = ObjectAnimator.ofFloat(ivDetail, "alpha", 0, 1);
+            ObjectAnimator hideAnim = ObjectAnimator.ofFloat(clReveal, "alpha", 1, 0);
+            showAnim.setDuration(ANIM);
+            hideAnim.setDuration(ANIM);
             if (isVisible) {
                 isVisible = false;
-                clReveal.setVisibility(View.INVISIBLE);
+
+                hideAnim.removeAllListeners();
+                hideAnim.setTarget(clReveal);
+                hideAnim.start();
+                hideAnim.addListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        clReveal.setVisibility(View.INVISIBLE);
+                    }
+                });
+
                 ivDetail.setVisibility(View.VISIBLE);
+                showAnim.removeAllListeners();
+                showAnim.setTarget(ivDetail);
+                showAnim.start();
                 ctlBar.setTitle(detail);
             } else {
                 isVisible = true;
-                ivDetail.setVisibility(View.INVISIBLE);
-                ctlBar.setTitle("  ");
+
+                hideAnim.removeAllListeners();
+                hideAnim.setTarget(ivDetail);
+                hideAnim.start();
+                hideAnim.addListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        ivDetail.setVisibility(View.INVISIBLE);
+                    }
+                });
+
                 clReveal.setVisibility(View.VISIBLE);
+                showAnim.removeAllListeners();
+                showAnim.setTarget(clReveal);
+                showAnim.start();
+
+                ctlBar.setTitle("  ");
             }
         }
 

@@ -15,10 +15,10 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/app_bar_height"
+        android:layout_height="@dimen/dp_280"
+        android:fitsSystemWindows="true"
         android:foreground="?attr/selectableItemBackground"
         android:background="@null"
-        android:fitsSystemWindows="true"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -43,7 +43,7 @@
                 tools:targetApi="lollipop" />
 
             <include layout="@layout/detail_reveal"
-                android:visibility="invisible"/>
+                android:visibility="invisible" />
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -103,7 +103,6 @@
         android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@drawable/register"
         app:layout_anchor="@id/app_bar"
-        app:layout_anchorGravity="bottom|end"
-        tools:targetApi="lollipop" />
+        app:layout_anchorGravity="bottom|end" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

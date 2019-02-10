@@ -20,7 +20,6 @@ public class RegisterData extends BmobObject {
     private String direction;
     private String spectiality;
     private String selfIntroduction;
-    private String expection;
 
     public String getName() {
         return name;
@@ -118,11 +117,4 @@ public class RegisterData extends BmobObject {
         this.selfIntroduction = selfIntroduction;
     }
 
-    public String getExpection() {
-        return expection;
-    }
-
-    public void setExpection(String expection) {
-        this.expection = expection;
-    }
 }

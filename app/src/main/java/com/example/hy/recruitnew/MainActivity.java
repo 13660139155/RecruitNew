@@ -1,21 +1,23 @@
 package com.example.hy.recruitnew;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.transition.Explode;
 import android.util.TypedValue;
+import android.view.DisplayCutout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewPropertyAnimator;
 import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.BounceInterpolator;
 import com.example.hy.recruitnew.adapter.BaseRvAdapter;
 import com.example.hy.recruitnew.decoration.ItemDecoration;
 import com.example.hy.recruitnew.manager.CenterLayoutManager;
-import com.example.utilslibrary.StatusBarUtil;
 import com.example.utilslibrary.ToastUtil;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
@@ -58,9 +60,8 @@ public class MainActivity extends AppCompatActivity {
             getWindow().setEnterTransition(new Explode());
         }
         setContentView(R.layout.activity_main);
-        StatusBarUtil.compat(this);
-        mUnbinder = ButterKnife.bind(this);
 
+        mUnbinder = ButterKnife.bind(this);
         mLinearLayoutManager = new CenterLayoutManager(this);
         mLinearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         mBaseRvAdapter = new BaseRvAdapter();

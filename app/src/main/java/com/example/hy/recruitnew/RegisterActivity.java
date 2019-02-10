@@ -5,12 +5,16 @@ import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.transition.Explode;
 import android.util.Log;
+import android.view.DisplayCutout;
+import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -69,8 +73,6 @@ public class RegisterActivity extends AppCompatActivity {
     EditText etSpectiality;
     @BindView(R.id.et_self_introduction)
     EditText etSelfIntroduction;
-    @BindView(R.id.et_expection)
-    EditText etExpection;
     @BindView(R.id.nsv_register)
     NestedScrollView nsvRegister;
 
@@ -87,7 +89,7 @@ public class RegisterActivity extends AppCompatActivity {
             getWindow().setEnterTransition(new Explode());
         }
         setContentView(R.layout.activity_register);
-        StatusBarUtil.compat(this);
+
         mUnbinder = ButterKnife.bind(this);
         setSupportActionBar(tlCommon);
 
@@ -168,7 +170,7 @@ public class RegisterActivity extends AppCompatActivity {
         if(
                 isEmpty(etName) || isEmpty(etSchoolNumber) || isEmpty(etSex) || isEmpty(etAcademy) ||
                         isEmpty(etClasses)|| isEmpty(etBusiness) || isEmpty(etPhoneNumber) || isEmpty(etQq) ||
-                        isEmpty(etEmail) || isEmpty(etSpectiality) || isEmpty(etSelfIntroduction) || isEmpty(etExpection)
+                        isEmpty(etEmail) || isEmpty(etSpectiality) || isEmpty(etSelfIntroduction)
                 ){
             ToastUtil.showToast(this, getString(R.string.register_error));
             return;
@@ -188,7 +190,6 @@ public class RegisterActivity extends AppCompatActivity {
         registerData.setEmail(getEtString(etEmail));
         registerData.setSpectiality(getEtString(etSpectiality));
         registerData.setSpectiality(getEtString(etSelfIntroduction));
-        registerData.setExpection(getEtString(etExpection));
         registerData.setDirection(mRadioButton.getText().toString());
         registerData.save(new SaveListener<String>() {
             @Override
