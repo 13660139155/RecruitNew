@@ -11,14 +11,10 @@ public class RegisterData extends BmobObject {
     private String name;
     private String schoolNumber;
     private String sex;
-    private String academy;
+    private String profession;
     private String classes;
-    private String busines;
     private String phone;
-    private String qq;
-    private String email;
     private String direction;
-    private String spectiality;
     private String selfIntroduction;
 
     public String getName() {
@@ -45,12 +41,12 @@ public class RegisterData extends BmobObject {
         this.sex = sex;
     }
 
-    public String getAcademy() {
-        return academy;
+    public String getProfession() {
+        return profession;
     }
 
-    public void setAcademy(String academy) {
-        this.academy = academy;
+    public void setProfession(String profession) {
+        this.profession = profession;
     }
 
     public String getClasses() {
@@ -61,14 +57,6 @@ public class RegisterData extends BmobObject {
         this.classes = classes;
     }
 
-    public String getBusines() {
-        return busines;
-    }
-
-    public void setBusines(String busines) {
-        this.busines = busines;
-    }
-
     public String getPhone() {
         return phone;
     }
@@ -77,36 +65,12 @@ public class RegisterData extends BmobObject {
         this.phone = phone;
     }
 
-    public String getQq() {
-        return qq;
-    }
-
-    public void setQq(String qq) {
-        this.qq = qq;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getDirection() {
         return direction;
     }
 
     public void setDirection(String direction) {
         this.direction = direction;
-    }
-
-    public String getSpectiality() {
-        return spectiality;
-    }
-
-    public void setSpectiality(String spectiality) {
-        this.spectiality = spectiality;
     }
 
     public String getSelfIntroduction() {

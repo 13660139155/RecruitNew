@@ -5,23 +5,18 @@ import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.transition.Explode;
 import android.util.Log;
-import android.view.DisplayCutout;
-import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.example.hy.recruitnew.bean.RegisterData;
-import com.example.utilslibrary.StatusBarUtil;
 import com.example.utilslibrary.ToastUtil;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -45,18 +40,12 @@ public class RegisterActivity extends AppCompatActivity {
     EditText etSchoolNumber;
     @BindView(R.id.et_sex)
     EditText etSex;
-    @BindView(R.id.et_academy)
-    EditText etAcademy;
+    @BindView(R.id.et_profession)
+    EditText etProfession;
     @BindView(R.id.et_classes)
     EditText etClasses;
-    @BindView(R.id.et_business)
-    EditText etBusiness;
     @BindView(R.id.et_phone_number)
     EditText etPhoneNumber;
-    @BindView(R.id.et_qq)
-    EditText etQq;
-    @BindView(R.id.et_email)
-    EditText etEmail;
     @BindView(R.id.rb_background)
     RadioButton rbBackground;
     @BindView(R.id.rb_front)
@@ -69,8 +58,6 @@ public class RegisterActivity extends AppCompatActivity {
     RadioButton rbBigData;
     @BindView(R.id.rg_direction2)
     RadioGroup rgDirection2;
-    @BindView(R.id.et_spectiality)
-    EditText etSpectiality;
     @BindView(R.id.et_self_introduction)
     EditText etSelfIntroduction;
     @BindView(R.id.nsv_register)
@@ -168,9 +155,8 @@ public class RegisterActivity extends AppCompatActivity {
      */
     private void register() {
         if(
-                isEmpty(etName) || isEmpty(etSchoolNumber) || isEmpty(etSex) || isEmpty(etAcademy) ||
-                        isEmpty(etClasses)|| isEmpty(etBusiness) || isEmpty(etPhoneNumber) || isEmpty(etQq) ||
-                        isEmpty(etEmail) || isEmpty(etSpectiality) || isEmpty(etSelfIntroduction)
+                isEmpty(etName) || isEmpty(etSchoolNumber) || isEmpty(etSex) || isEmpty(etProfession) ||
+                        isEmpty(etClasses) || isEmpty(etPhoneNumber) || isEmpty(etSelfIntroduction)
                 ){
             ToastUtil.showToast(this, getString(R.string.register_error));
             return;
@@ -184,12 +170,9 @@ public class RegisterActivity extends AppCompatActivity {
         registerData.setSchoolNumber(getEtString(etSchoolNumber));
         registerData.setSex(getEtString(etSex));
         registerData.setClasses(getEtString(etClasses));
-        registerData.setBusines(getEtString(etBusiness));
         registerData.setPhone(getEtString(etPhoneNumber));
-        registerData.setQq(getEtString(etQq));
-        registerData.setEmail(getEtString(etEmail));
-        registerData.setSpectiality(getEtString(etSpectiality));
-        registerData.setSpectiality(getEtString(etSelfIntroduction));
+        registerData.setSelfIntroduction(getEtString(etSelfIntroduction));
+        registerData.setProfession(getEtString(etProfession));
         registerData.setDirection(mRadioButton.getText().toString());
         registerData.save(new SaveListener<String>() {
             @Override
