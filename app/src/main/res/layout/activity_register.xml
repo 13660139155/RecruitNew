@@ -434,8 +434,6 @@
 
         </androidx.core.widget.NestedScrollView>
 
-
     </com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout>
-
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

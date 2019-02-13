@@ -71,7 +71,10 @@ public class MainActivity extends AppCompatActivity {
         LinearSnapHelper linearSnapHelper = new LinearSnapHelper();
         linearSnapHelper.attachToRecyclerView(rvMain);
         rvMain.addItemDecoration(new ItemDecoration());
-        mBaseRvAdapter.setItemClickListener(postion -> rvMain.smoothScrollToPosition(postion));
+        mBaseRvAdapter.setItemClickListener(postion -> {
+            if(rvMain.getLayoutManager().isSmoothScrolling()) return;
+            rvMain.smoothScrollToPosition(postion);
+        });
 
 //        PagerSnapHelper pagerSnapHelper = new PagerSnapHelper();
 //        pagerSnapHelper.attachToRecyclerView(rvMain);

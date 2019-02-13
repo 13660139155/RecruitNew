@@ -1,4 +1,4 @@
-package com.example.hy.recruitnew.bean;
+package com.example.hy.recruitnew.http.bean;
 
 import cn.bmob.v3.BmobObject;
 

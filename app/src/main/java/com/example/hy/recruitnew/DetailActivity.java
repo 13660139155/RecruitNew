@@ -108,7 +108,7 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void startActivity(int flag) {
-        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
             RegisterActivity.startActivityByExplode(this, flag);
         }else {
             RegisterActivity.startActivity(this, flag);

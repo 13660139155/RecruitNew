@@ -55,17 +55,19 @@ public class BaseRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             });
 
             holder.ivLogo.setOnClickListener(v -> {
-                if(mItemClickListener != null && mCompleteVisibileItemPosition != -1 && mCompleteVisibileItemPosition != viewType){
+                if(mItemClickListener != null && mCompleteVisibileItemPosition != viewType){
                     mItemClickListener.onClick(viewType);
                     return;
                 }
-                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+
+                if(mItemClickListener != null)
+                    mItemClickListener.onClick(viewType);
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     DetailActivity.startActivityByShareMore(parent.getContext(), viewType - 1, holder.ivLogo, holder.cd2);
                 } else {
                     DetailActivity.startActivity(parent.getContext(), viewType - 1);
                 }
-                if(mItemClickListener != null)
-                    mItemClickListener.onClick(viewType);
             });
 
             holder.initListener(mRecyclerView, viewType);

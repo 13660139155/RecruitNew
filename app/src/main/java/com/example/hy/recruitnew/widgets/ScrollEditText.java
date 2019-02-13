@@ -93,13 +93,15 @@ public class ScrollEditText extends EditText implements
                 }
             }
         }
+        //
         if(canVerticalScroll(this)){
-            v.getParent().requestDisallowInterceptTouchEvent(true);
+            this.getParent().requestDisallowInterceptTouchEvent(true);
             if(event.getAction() == MotionEvent.ACTION_UP)
-                v.getParent().requestDisallowInterceptTouchEvent(false);
+                this.getParent().requestDisallowInterceptTouchEvent(false);
         }
         return false;
     }
+
 
     /**
      * 控制Drawable的显隐性
@@ -122,7 +124,8 @@ public class ScrollEditText extends EditText implements
         int scrollRange = editText.getLayout().getHeight();//控件内容的总高度
         int scrollExtent = editText.getHeight() - editText.getCompoundPaddingTop() -editText.getCompoundPaddingBottom();//控件实际显示的高度
         int scrollDifference = scrollRange - scrollExtent; //控件内容总高度与实际显示高度的差值
-        if(scrollDifference == 0) return false;
+        if(scrollDifference == 0)
+            return false;
         return scrollY > 0 || (scrollY < scrollDifference - 1);
     }
 

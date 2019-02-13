@@ -16,8 +16,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import com.example.hy.recruitnew.bean.RegisterData;
-import com.example.utilslibrary.ToastUtil;
+import com.example.hy.recruitnew.widgets.VerificationPopup;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -25,8 +24,6 @@ import androidx.core.widget.NestedScrollView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import cn.bmob.v3.exception.BmobException;
-import cn.bmob.v3.listener.SaveListener;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -154,40 +151,45 @@ public class RegisterActivity extends AppCompatActivity {
      * 提交报名表
      */
     private void register() {
-        if(
-                isEmpty(etName) || isEmpty(etSchoolNumber) || isEmpty(etSex) || isEmpty(etProfession) ||
-                        isEmpty(etClasses) || isEmpty(etPhoneNumber) || isEmpty(etSelfIntroduction)
-                ){
-            ToastUtil.showToast(this, getString(R.string.register_error));
-            return;
-        }
-        if(mRadioButton == null){
-            ToastUtil.showToast(this, getString(R.string.register_error3));
-            return;
-        }
-        RegisterData registerData = new RegisterData();
-        registerData.setName(getEtString(etName));
-        registerData.setSchoolNumber(getEtString(etSchoolNumber));
-        registerData.setSex(getEtString(etSex));
-        registerData.setClasses(getEtString(etClasses));
-        registerData.setPhone(getEtString(etPhoneNumber));
-        registerData.setSelfIntroduction(getEtString(etSelfIntroduction));
-        registerData.setProfession(getEtString(etProfession));
-        registerData.setDirection(mRadioButton.getText().toString());
-        registerData.save(new SaveListener<String>() {
-            @Override
-            public void done(String s, BmobException e) {
-                if(e != null){
-                    if(e.getErrorCode() == 9015){
-                        ToastUtil.showToast(RegisterActivity.this, getString(R.string.register_error4));
-                        return;
-                    }
-                    ToastUtil.showToast(RegisterActivity.this, getString(R.string.register_error2));
-                    return;
-                }
-                ToastUtil.showToast(RegisterActivity.this, getString(R.string.register_success));
-            }
-        });
+//        if(
+//                isEmpty(etName) || isEmpty(etSchoolNumber) || isEmpty(etSex) || isEmpty(etProfession) ||
+//                        isEmpty(etClasses) || isEmpty(etPhoneNumber) || isEmpty(etSelfIntroduction)
+//                ){
+//            ToastUtil.showToast(this, getString(R.string.register_error));
+//            return;
+//        }
+//        if(mRadioButton == null){
+//            ToastUtil.showToast(this, getString(R.string.register_error3));
+//            return;
+//        }
+
+        VerificationPopup verificationPopup = new VerificationPopup(this);
+        verificationPopup.show(tlCommon);
+
+
+//        RegisterData registerData = new RegisterData();
+//        registerData.setName(getEtString(etName));
+//        registerData.setSchoolNumber(getEtString(etSchoolNumber));
+//        registerData.setSex(getEtString(etSex));
+//        registerData.setClasses(getEtString(etClasses));
+//        registerData.setPhone(getEtString(etPhoneNumber));
+//        registerData.setSelfIntroduction(getEtString(etSelfIntroduction));
+//        registerData.setProfession(getEtString(etProfession));
+//        registerData.setDirection(mRadioButton.getText().toString());
+//        registerData.save(new SaveListener<String>() {
+//            @Override
+//            public void done(String s, BmobException e) {
+//                if(e != null){
+//                    if(e.getErrorCode() == 9015){
+//                        ToastUtil.showToast(RegisterActivity.this, getString(R.string.register_error4));
+//                        return;
+//                    }
+//                    ToastUtil.showToast(RegisterActivity.this, getString(R.string.register_error2));
+//                    return;
+//                }
+//                ToastUtil.showToast(RegisterActivity.this, getString(R.string.register_success));
+//            }
+//        });
     }
 
 
