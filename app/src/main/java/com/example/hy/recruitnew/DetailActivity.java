@@ -33,7 +33,6 @@ import androidx.core.content.ContextCompat;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import cn.bmob.v3.b.V;
 
 public class DetailActivity extends AppCompatActivity {
 

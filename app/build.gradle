@@ -18,18 +18,16 @@ android {
         }
     }
 
-    //**兼容Android6.0系统所需，如果这句话报错，可在dependencies标签下使用compile 'cn.bmob.android:http-legacy:1.0'**
-    useLibrary 'org.apache.http.legacy'
     compileOptions {
         sourceCompatibility = '1.8'
         targetCompatibility = '1.8'
     }
 
-}
-
-configurations {
-    all*.exclude group: 'com.google.code.gson'
-    all*.exclude group: 'com.squareup.okio'
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
 }
 
 dependencies {
@@ -39,11 +37,6 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha3'
     implementation 'com.google.android.material:material:1.0.0'
 
-    //bmob-sdk：Bmob的android sdk包，包含了Bmob的数据存储、文件等服务，以下是最新的bmob-sdk:
-    implementation 'cn.bmob.android:bmob-sdk:3.6.3'
-    //如果你想应用能够兼容Android6.0，请添加此依赖(org.apache.http.legacy.jar)
-    implementation 'cn.bmob.android:http-legacy:1.0'
-
     implementation 'com.jakewharton:butterknife:10.0.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
 
@@ -51,12 +44,10 @@ dependencies {
     implementation 'com.lcodecorex:tkrefreshlayout:1.0.7'
 
     implementation 'com.github.rain9155:RUtils:v1.0'
+    
+    implementation 'com.squareup.okhttp3:okhttp:3.11.0'
 
-    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
-
-    implementation 'com.github.bumptech.glide:glide:4.8.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
+    implementation(name: 'geetest_sensebot_android_v4.0.5_20190122', ext: 'aar')
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'

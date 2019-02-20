@@ -1,21 +1,46 @@
-package com.example.hy.recruitnew.http.bean;
-
-import cn.bmob.v3.BmobObject;
+package com.example.hy.recruitnew.http;
 
 /**
  * 报名表
  * Created by 陈健宇 at 2018/11/9
  */
-public class RegisterData extends BmobObject {
+public class RegisterData {
 
     private String name;
     private String schoolNumber;
-    private String sex;
+    private int sex;
     private String profession;
     private String classes;
     private String phone;
     private String direction;
     private String selfIntroduction;
+    private String validate;
+    private String challenge;
+    private String seccode;
+
+    public String getValidate() {
+        return validate;
+    }
+
+    public void setValidate(String validate) {
+        this.validate = validate;
+    }
+
+    public String getChallenge() {
+        return challenge;
+    }
+
+    public void setChallenge(String challenge) {
+        this.challenge = challenge;
+    }
+
+    public String getSeccode() {
+        return seccode;
+    }
+
+    public void setSeccode(String seccode) {
+        this.seccode = seccode;
+    }
 
     public String getName() {
         return name;
@@ -33,11 +58,11 @@ public class RegisterData extends BmobObject {
         this.schoolNumber = schoolNumber;
     }
 
-    public String getSex() {
+    public int getSex() {
         return sex;
     }
 
-    public void setSex(String sex) {
+    public void setSex(int sex) {
         this.sex = sex;
     }
 

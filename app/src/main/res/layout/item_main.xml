@@ -89,7 +89,7 @@
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 android:padding="@dimen/dp_10"
-                android:textSize="@dimen/sp_18"
+                android:textSize="@dimen/sp_20"
                 tools:text="@string/main_android_text"/>
 
         </androidx.cardview.widget.CardView>

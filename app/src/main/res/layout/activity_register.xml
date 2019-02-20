@@ -93,27 +93,73 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/name"
+                                android:textSize="@dimen/sp_16"
                                 android:background="@null"
                                 android:textColor="@color/white"
                                 android:layout_marginTop="@dimen/dp_10"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintLeft_toLeftOf="parent"
-                                app:layout_constraintRight_toLeftOf="@+id/et_name"/>
+                                app:layout_constraintRight_toLeftOf="@+id/til_name"/>
 
-                            <com.example.hy.recruitnew.widgets.ScrollEditText
-                                android:id="@+id/et_name"
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/til_name"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:singleLine="true"
-                                android:textColor="@color/white"
-                                android:layout_marginRight="@dimen/dp_20"
-                                android:inputType="textPersonName"
                                 app:layout_constraintHorizontal_weight="1"
                                 app:layout_constraintLeft_toRightOf="@id/btn_name"
                                 app:layout_constraintBottom_toBottomOf="@id/btn_name"
                                 app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintRight_toRightOf="parent"
+                                app:layout_constraintRight_toRightOf="parent">
+
+                                <com.example.hy.recruitnew.widgets.ScrollEditText
+                                    android:id="@+id/et_name"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:singleLine="true"
+                                    android:textColor="@color/white"
+                                    android:layout_marginRight="@dimen/dp_20"
+                                    android:inputType="textPersonName"
+                                    tools:ignore="Autofill,LabelFor" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <Button
+                                android:id="@+id/btn_sex"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@null"
+                                android:text="@string/sex"
+                                android:textSize="@dimen/sp_16"
+                                android:textColor="@color/white"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/btn_name" />
+
+                            <CheckBox
+                                android:id="@+id/cb_nan"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/white"
+                                android:text="@string/nan"
+                                android:textSize="@dimen/sp_18"
+                                app:layout_constraintHorizontal_bias="0.2"
+                                app:layout_constraintLeft_toRightOf="@id/btn_sex"
+                                app:layout_constraintBottom_toBottomOf="@id/btn_sex"
+                                app:layout_constraintTop_toTopOf="@id/btn_sex"
                                 tools:ignore="Autofill,LabelFor" />
+
+                            <CheckBox
+                                android:id="@+id/cb_nv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/white"
+                                android:text="@string/nv"
+                                android:textSize="@dimen/sp_18"
+                                android:layout_marginStart="@dimen/dp_50"
+                                app:layout_constraintLeft_toRightOf="@id/cb_nan"
+                                app:layout_constraintBottom_toBottomOf="@id/btn_sex"
+                                app:layout_constraintTop_toTopOf="@id/btn_sex"
+                                tools:ignore="Autofill,LabelFor"
+                                android:layout_marginLeft="@dimen/dp_50" />
 
                             <Button
                                 android:id="@+id/btn_school_number"
@@ -122,50 +168,35 @@
                                 android:background="@null"
                                 android:textColor="@color/white"
                                 android:text="@string/school_number"
-                                app:layout_constraintTop_toBottomOf="@id/btn_name"
+                                android:textSize="@dimen/sp_16"
+                                app:layout_constraintTop_toBottomOf="@id/btn_sex"
                                 app:layout_constraintLeft_toLeftOf="parent"
-                                app:layout_constraintLeft_toRightOf="@+id/et_school_number"/>
+                                app:layout_constraintRight_toLeftOf="@+id/til_school_number"/>
 
-                            <EditText
-                                android:id="@+id/et_school_number"
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/til_school_number"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:singleLine="true"
-                                android:textColor="@color/white"
-                                android:inputType="phone"
-                                app:layout_constraintHorizontal_weight="3"
+                                app:layout_constraintHorizontal_weight="1"
                                 app:layout_constraintLeft_toRightOf="@id/btn_school_number"
                                 app:layout_constraintBottom_toBottomOf="@id/btn_school_number"
                                 app:layout_constraintTop_toTopOf="@id/btn_school_number"
-                                app:layout_constraintRight_toLeftOf="@id/btn_sex"
-                                tools:ignore="Autofill,LabelFor" />
+                                app:layout_constraintRight_toRightOf="parent">
 
-                            <Button
-                                android:id="@+id/btn_sex"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:background="@null"
-                                android:text="@string/sex"
-                                android:textColor="@color/white"
-                                app:layout_constraintLeft_toRightOf="@id/et_school_number"
-                                app:layout_constraintBottom_toBottomOf="@id/btn_school_number"
-                                app:layout_constraintTop_toTopOf="@id/btn_school_number"
-                                app:layout_constraintRight_toLeftOf="@+id/et_sex"/>
+                                <com.example.hy.recruitnew.widgets.ScrollEditText
+                                    android:id="@+id/et_school_number"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:singleLine="true"
+                                    android:textColor="@color/white"
+                                    android:inputType="phone"
+                                    android:layout_marginRight="@dimen/dp_20"
+                                    tools:ignore="Autofill,LabelFor" />
 
-                            <EditText
-                                android:id="@+id/et_sex"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:singleLine="true"
-                                android:textColor="@color/white"
-                                android:inputType="textPhonetic"
-                                android:layout_marginRight="@dimen/dp_20"
-                                app:layout_constraintHorizontal_weight="1"
-                                app:layout_constraintLeft_toRightOf="@id/btn_sex"
-                                app:layout_constraintBottom_toBottomOf="@id/btn_school_number"
-                                app:layout_constraintTop_toTopOf="@id/btn_school_number"
-                                app:layout_constraintRight_toRightOf="parent"
-                                tools:ignore="Autofill,LabelFor" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
 
                             <Button
                                 android:id="@+id/btn_profession"
@@ -173,25 +204,33 @@
                                 android:layout_height="wrap_content"
                                 android:background="@null"
                                 android:text="@string/profession"
+                                android:textSize="@dimen/sp_16"
                                 android:textColor="@color/white"
                                 app:layout_constraintLeft_toLeftOf="parent"
                                 app:layout_constraintTop_toBottomOf="@id/btn_school_number"
-                                app:layout_constraintRight_toLeftOf="@+id/et_profession"/>
+                                app:layout_constraintRight_toLeftOf="@+id/til_profession"/>
 
-                            <com.example.hy.recruitnew.widgets.ScrollEditText
-                                android:id="@+id/et_profession"
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/til_profession"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:singleLine="true"
-                                android:textColor="@color/white"
-                                android:inputType="text"
-                                android:layout_marginRight="@dimen/dp_20"
                                 app:layout_constraintHorizontal_weight="1"
                                 app:layout_constraintLeft_toRightOf="@id/btn_profession"
                                 app:layout_constraintBottom_toBottomOf="@id/btn_profession"
                                 app:layout_constraintTop_toTopOf="@id/btn_profession"
-                                app:layout_constraintRight_toRightOf="parent"
-                                tools:ignore="Autofill,LabelFor" />
+                                app:layout_constraintRight_toRightOf="parent">
+
+                                <com.example.hy.recruitnew.widgets.ScrollEditText
+                                    android:id="@+id/et_profession"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:singleLine="true"
+                                    android:textColor="@color/white"
+                                    android:inputType="text"
+                                    android:layout_marginRight="@dimen/dp_20"
+                                    tools:ignore="Autofill,LabelFor" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
 
                             <Button
                                 android:id="@+id/btn_classes"
@@ -199,28 +238,35 @@
                                 android:layout_height="wrap_content"
                                 android:background="@null"
                                 android:text="@string/classes"
+                                android:textSize="@dimen/sp_16"
                                 android:textColor="@color/white"
                                 android:layout_marginBottom="@dimen/dp_10"
                                 app:layout_constraintLeft_toLeftOf="parent"
                                 app:layout_constraintTop_toBottomOf="@id/btn_profession"
-                                app:layout_constraintRight_toLeftOf="@+id/et_classes"/>
+                                app:layout_constraintRight_toLeftOf="@+id/til_classes"/>
 
-                            <com.example.hy.recruitnew.widgets.ScrollEditText
-                                android:id="@+id/et_classes"
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/til_classes"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:singleLine="true"
-                                android:labelFor="@id/et_classes"
-                                android:inputType="text"
-                                android:textColor="@color/white"
-                                android:layout_marginRight="@dimen/dp_20"
                                 app:layout_constraintHorizontal_weight="1"
                                 app:layout_constraintLeft_toRightOf="@id/btn_classes"
                                 app:layout_constraintBottom_toBottomOf="@id/btn_classes"
                                 app:layout_constraintTop_toTopOf="@id/btn_classes"
-                                app:layout_constraintRight_toRightOf="parent"
-                                tools:ignore="Autofill,LabelFor" />
+                                app:layout_constraintRight_toRightOf="parent">
 
+                                <com.example.hy.recruitnew.widgets.ScrollEditText
+                                    android:id="@+id/et_classes"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:singleLine="true"
+                                    android:labelFor="@id/et_classes"
+                                    android:inputType="text"
+                                    android:textColor="@color/white"
+                                    android:layout_marginRight="@dimen/dp_20"
+                                    tools:ignore="Autofill,LabelFor" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -242,25 +288,33 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/phone_number"
                                 android:background="@null"
+                                android:textSize="@dimen/sp_16"
                                 android:textColor="@color/white"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintLeft_toLeftOf="parent"
-                                app:layout_constraintRight_toLeftOf="@+id/et_phone_number"/>
+                                app:layout_constraintRight_toLeftOf="@+id/til_phone_number"/>
 
-                            <com.example.hy.recruitnew.widgets.ScrollEditText
-                                android:id="@+id/et_phone_number"
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/til_phone_number"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:singleLine="true"
-                                android:inputType="phone"
-                                android:textColor="@color/white"
-                                android:layout_marginRight="@dimen/dp_20"
                                 app:layout_constraintHorizontal_weight="1"
                                 app:layout_constraintLeft_toRightOf="@id/btn_phone_number"
                                 app:layout_constraintBottom_toBottomOf="@id/btn_phone_number"
                                 app:layout_constraintTop_toTopOf="@id/btn_phone_number"
-                                app:layout_constraintRight_toRightOf="parent"
-                                tools:ignore="Autofill,LabelFor,TextFields" />
+                                app:layout_constraintRight_toRightOf="parent">
+
+                                <com.example.hy.recruitnew.widgets.ScrollEditText
+                                    android:id="@+id/et_phone_number"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:singleLine="true"
+                                    android:inputType="phone"
+                                    android:textColor="@color/white"
+                                    android:layout_marginRight="@dimen/dp_20"
+                                    tools:ignore="Autofill,LabelFor,TextFields" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
 
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -288,6 +342,7 @@
                                 android:background="@null"
                                 android:textColor="@color/white"
                                 android:text="@string/direction"
+                                android:textSize="@dimen/sp_16"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintLeft_toLeftOf="parent"
                                 app:layout_constraintRight_toLeftOf="@+id/rg_direction"
@@ -310,6 +365,7 @@
                                     android:layout_width="0dp"
                                     android:layout_weight="1"
                                     android:checked="false"
+                                    android:textSize="@dimen/sp_16"
                                     android:textColor="@color/white"
                                     android:text="@string/direction_background"/>
 
@@ -319,6 +375,7 @@
                                     android:layout_weight="1"
                                     android:layout_height="wrap_content"
                                     android:checked="false"
+                                    android:textSize="@dimen/sp_16"
                                     android:textColor="@color/white"
                                     android:text="@string/direction_front"/>
 
@@ -342,6 +399,7 @@
                                     android:layout_width="0dp"
                                     android:layout_weight="1"
                                     android:checked="false"
+                                    android:textSize="@dimen/sp_16"
                                     android:textColor="@color/white"
                                     android:text="@string/direction_android"/>
 
@@ -351,6 +409,7 @@
                                     android:layout_weight="1"
                                     android:layout_height="wrap_content"
                                     android:checked="false"
+                                    android:textSize="@dimen/sp_16"
                                     android:textColor="@color/white"
                                     android:text="@string/direction_bigData"/>
 
@@ -378,11 +437,13 @@
                                 android:layout_height="wrap_content"
                                 android:background="@null"
                                 android:text="@string/self_introduction"
+                                android:textSize="@dimen/sp_16"
                                 android:textColor="@color/white"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintLeft_toLeftOf="parent"
-                                app:layout_constraintRight_toLeftOf="@+id/et_self_introduction"
+                                app:layout_constraintRight_toLeftOf="@+id/til_self_introduction"
                                 app:layout_constraintBottom_toBottomOf="parent"/>
+
                             <View
                                 android:layout_width="@dimen/dp_2"
                                 android:layout_height="@dimen/dp_0"
@@ -391,23 +452,28 @@
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintBottom_toBottomOf="parent"/>
 
-                            <com.example.hy.recruitnew.widgets.ScrollEditText
-                                android:id="@+id/et_self_introduction"
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/til_self_introduction"
                                 android:layout_width="0dp"
-                                android:layout_height="@dimen/dp_200"
-                                android:maxHeight="@dimen/dp_200"
-                                android:textColor="@color/white"
-                                android:background="@null"
-                                android:layout_marginLeft="@dimen/dp_5"
-                                android:scrollbars="vertical"
-                                android:layout_margin="@dimen/dp_10"
+                                android:layout_height="wrap_content"
                                 app:layout_constraintHorizontal_weight="1"
-                                app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintLeft_toRightOf="@id/btn_self_introduction"
                                 app:layout_constraintRight_toRightOf="parent"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                tools:ignore="Autofill,LabelFor,TextFields" />
+                                app:layout_constraintTop_toTopOf="parent">
 
+                                <com.example.hy.recruitnew.widgets.ScrollEditText
+                                    android:id="@+id/et_self_introduction"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/dp_200"
+                                    android:layout_margin="@dimen/dp_10"
+                                    android:layout_marginLeft="@dimen/dp_5"
+                                    android:background="@null"
+                                    android:maxHeight="@dimen/dp_200"
+                                    android:scrollbars="vertical"
+                                    android:textColor="@color/white"
+                                    tools:ignore="Autofill,LabelFor,TextFields" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 

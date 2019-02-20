@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">RDCRecruitNew</string>
+    <string name="app_name">研发招新</string>
 
     //register
     <string name="register_android">安卓报名表</string>
@@ -9,6 +9,8 @@
     <string name="name">姓名:</string>
     <string name="school_number">学号:</string>
     <string name="sex">性别:</string>
+    <string name="nan">男生</string>
+    <string name="nv">女生</string>
     <string name="academy">学院:</string>
     <string name="profession">专业:</string>
     <string name="classes">班级:</string>
@@ -17,10 +19,10 @@
     <string name="email">邮箱:</string>
     <string name="qq">QQ:</string>
     <string name="direction">报名方向:</string>
-    <string name="direction_android">Android开发</string>
-    <string name="direction_background">java后台开发</string>
-    <string name="direction_front">Web前端开发</string>
-    <string name="direction_bigData">大数据开发</string>
+    <string name="direction_android">Android</string>
+    <string name="direction_background">java后台</string>
+    <string name="direction_front">Web前端</string>
+    <string name="direction_bigData">大数据</string>
     <string name="background">后台:</string>
     <string name="front">前端:</string>
     <string name="android">安卓:</string>
@@ -35,6 +37,12 @@
     <string name="register_error2">报名失败，请重新提交</string>
     <string name="register_error3">请选择报名方向</string>
     <string name="register_error4">请打开网络再提交</string>
+    <string name="register_error5">请选择性别</string>
+    <string name="register_error6">请输入正确的学号</string>
+    <string name="register_error7">请输入正确的手机号</string>
+    <string name="register_error8">含有非法字符，请输入数字</string>
+    <string name="register_error9">含有非法标点符号</string>
+    <string name="register_error10">内容不能为空</string>
     <string name="register_success">恭喜，报名成功</string>
 
 
@@ -71,7 +79,7 @@
          \t\t\t\t如果你对人工智能充满了向往，对深度学习充满兴趣，无惧抽象的数学，志在拥抱最前沿的技术；如果你善于自主钻研，有责任感，以及良好的团队合作精神和分享精神；如果你厌倦平凡机械的生活，享受对未知的探索与前行；请大胆的选择我们大数据组，丰富的资源。</string>
 
     <string name="detail_rdc">
-        \t\t\t\t\t2001年,研发中心成立,至今已经17年历史,是计算机学院的一个老牌团队。\n\n
+        \t\t\t\t\t2001年,研发中心成立,至今已经18年历史,是计算机学院的一个老牌团队。\n\n
         \t\t\t\t这么多年来,团队成员一直致力于互联网、安卓手机应用数据库以及图形图像等技术的学习和开发。我们在基本专业课程和技能训练的基础上,通过项目过程的进一步学习,提高自身解决问题的能力、学习能力以及团队协作能力。\n\n
         \t\t\t\t团队已有大批师兄师姐进入了百度、腾讯、华为、网易、阿里巴巴、金山等公司进行工作，这里有优秀的学习榜样、丰富的学习资源、良好的学习氛围、珍贵的项目经验,还有活跃愉快的相处气氛。\n\n
         \t\t\t\t如果你有出色的学习能力、对知识有近乎渴望的追求、以及良好的抗压力和团队协作力，那就加入我们吧!\n\n
@@ -88,7 +96,7 @@
     <string name="main_background_text"> 主要进行Java后台服务器开发如JavaWeb应用服务器的开发和维护。</string>
     <string name="main_front_text"> 基于HTML/CSS/JS开发专注于网站界面以及提供更好的视觉冲击和用户体验。</string>
     <string name="main_bigData_text">挖掘数据、分析数据。既专注于基础，又落实于项目，既沉浸于原理，又回归到兴趣。</string>
-    <string name="main_rdc_text">2001年，研发中心成立，至今已经17年历史，是计算机学院一个最为老牌的团队。</string>
+    <string name="main_rdc_text">2001年，研发中心成立，至今已经18年历史，是计算机学院一个最为老牌的团队。</string>
     <string name="launch_recruit">正在\n招新</string>
 
     //other
