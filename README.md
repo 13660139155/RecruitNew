@@ -1,2 +1,2 @@
 # RecruitNew
-Rdc招新app，开发中
+Rdc招新app
