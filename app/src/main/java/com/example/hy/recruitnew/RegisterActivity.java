@@ -422,6 +422,7 @@ public class RegisterActivity extends AppCompatActivity {
             JSONObject jsonObject = null;
             try {
                 jsonObject = new JSONObject(string);
+                jsonObject.put("new_captcha", true);
             } catch (Exception e) {
                 e.printStackTrace();
             }
